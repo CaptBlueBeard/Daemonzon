@@ -1,0 +1,2 @@
+# Daemonzon
+Enter giveaways automatically
