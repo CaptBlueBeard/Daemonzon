@@ -4,10 +4,10 @@ Enter giveaways automatically.
 This program was written as a way for me to learn Python.  It's far from perfect and I take no responsibility for any damages caused by the use of this program.  That being said it in no way collects information from you.  The logon is handled strickly by the browser.
 
 # Requirements:
--Firefox browser - https://www.mozilla.org/en-US/firefox/new/
+- Firefox browser - https://www.mozilla.org/en-US/firefox/new/
   - Set Firefox Cookies and Site Data for amazon.com to allow
     - You will probably need to do this in the Remote Controlled browser once it opens the first time.
--Selenium for Python
+- Selenium for Python
   - with the Gecko Driver for Windows - https://github.com/mozilla/geckodriver/
 
 # What does it do?
