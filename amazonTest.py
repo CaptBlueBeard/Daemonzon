@@ -15,35 +15,24 @@ class AmazonBot:
         bot.get('https://www.amazon.com/ga/giveaways')
         input('Log into Amazon then press Enter ')
         bot.get(
-            'https://www.amazon.com/ga/p/e7a3c434a838315e?fsrc=glp&nav=amz&ref_=aga_p_vg_lp_p1_g21_nodup_dgv')
+            'https://www.amazon.com/ga/p/0ebf2a7d24473ac1?fsrc=glp&nav=amz&ref_=aga_p_vg_lp_p26_g14_nodup_dgv')
         time.sleep(5)
         try:
-            box = bot.find_element_by_link_text(
-                'Tap the box to see if you win')
+            followButton = bot.find_element_by_class_name(
+                "follow-author-continue-button")
         except:
-            print('no Tap the box')
-            box = None
+            followButton = None
+            print("No follow button")
             pass
-        if not box is None:
+        if not followButton is None:
             try:
-                box.click()
-                print('Entered')
+                followButton.click()
+                print('Clicked Follow')
                 # bot.find_element_by_class_name('a-text-center box-click-area').click()
             except:
-                print('Error clicking the box')
+                print('Error clicking follow')
                 # time.sleep(5)
                 pass
-
-        else:
-            video = bot.find_element_by_class_name('youtube-video')
-            try:
-                video.click()
-            except:
-                print('could not click video box')
-            time.sleep(20)
-            continueButton = bot.find_element_by_xpath(
-                '//*[@id="reactApp"]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[6]/div/div/div/button')
-            continueButton.click()
 
 
 daemon = AmazonBot('j.matt.lynch@gmail.com', 'Auseabledistraction$$3')
