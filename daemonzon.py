@@ -109,7 +109,7 @@ class AmazonBot:
                     print('Clicked entry box')
                     logger.info('Clicked entry box')
                 except:
-                    print("Unable to locate continueButton.  URL: {}".format(link))
+                    print(f"Unable to locate continueButton.  URL: {link}")
                     #print('Giveaway page: ' + str(urlIndex))
                     # print(link)
                     logger.info(
@@ -122,7 +122,7 @@ class AmazonBot:
                 logger.info("Already entered.")
                 time.sleep(5)
             else:
-                print("Error entering giveaway: {}".format(link))
+                print(f"Error entering giveaway: {link}")
                 # print(link)
                 logger.info('Error entering giveaway: %s', link)
                 time.sleep(5)
@@ -150,5 +150,6 @@ i = int(input('Start page: '))
 j = int(input('Stop page: '))
 while i < j:
     print('Giveaway Page ' + str(i))
+    logger.info("Giveaway Page %s", i)
     entryCount = daemon.enterGiveaway(i, entryCount)
     i += 1
