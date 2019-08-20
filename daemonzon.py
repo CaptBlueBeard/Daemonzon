@@ -7,7 +7,7 @@ import logging
 class AmazonBot:
     def __init__(self, logger=None):
         self.bot = webdriver.Firefox()
-        self.logger = logging.getLogger(__name__)
+        #self.logger = logging.getLogger(__name__)
 
     def login(self):
         # ----------------User Logs In -------------------
@@ -26,7 +26,7 @@ class AmazonBot:
             return
         if "you didn't win" in r.text:
             print("You didn't win")
-            self.logger.info("You didn't win")
+            logger.info("You didn't win")
         elif "You're a Winner" in r.text:
             print("!!!!!!!You won!!!!!!!!!")
             print(link)
@@ -58,6 +58,8 @@ class AmazonBot:
             try:
                 box = bot.find_element_by_link_text(
                     'Tap the box to see if you win')
+                print("There is a box to click")
+                logger.info("There is a box to click")
             except:
                 print('No box to click')
                 logger.info("No box to click")
@@ -82,8 +84,8 @@ class AmazonBot:
             if not box is None:  # reads if box is not NULL
                 try:
                     box.click()
-                    print('Entered Giveaway')
-                    logger.info('Entered Giveaway')
+                    print('Clicked box')
+                    logger.info('Clicked box')
                 except:
                     print('Error clicking the box')
                     logger.info("Error clicking the box")
@@ -104,10 +106,10 @@ class AmazonBot:
                     continueButton = bot.find_element_by_xpath(
                         '//*[@id="reactApp"]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[6]/div/div/div/button')
                     continueButton.click()
-                    print('Entered giveaway')
-                    logger.info('Entered giveaway')
+                    print('Clicked entry box')
+                    logger.info('Clicked entry box')
                 except:
-                    print("Unable to locate continueButton.  URL: %s", link)
+                    print("Unable to locate continueButton.  URL: {}".format(link))
                     #print('Giveaway page: ' + str(urlIndex))
                     # print(link)
                     logger.info(
@@ -120,7 +122,7 @@ class AmazonBot:
                 logger.info("Already entered.")
                 time.sleep(5)
             else:
-                print('Error entering giveaway: %s', link)
+                print("Error entering giveaway: {}".format(link))
                 # print(link)
                 logger.info('Error entering giveaway: %s', link)
                 time.sleep(5)
