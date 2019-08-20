@@ -11,7 +11,7 @@ class AmazonBot:
 
     def login(self):
         # ----------------User Logs In -------------------
-        self.logger.info("User logs in.")
+        logger.info("User logs in.")
         bot = self.bot
         bot.get('https://www.amazon.com/ga/giveaways')
         input('Log in on the Firefox browser. Once complete, press Enter here ')
@@ -30,10 +30,10 @@ class AmazonBot:
         elif "You're a Winner" in r.text:
             print("!!!!!!!You won!!!!!!!!!")
             print(link)
-            self.logger.info("!!!!!!!You won!!!!!!!!!:  %s", link)
+            logger.info("!!!!!!!You won!!!!!!!!!:  %s", link)
         else:
             print("Could not find result")
-            self.logger.info("Could not find result")
+            logger.info("Could not find result")
 
     def enterGiveaway(self, urlIndex, count):
         bot = self.bot
@@ -44,6 +44,7 @@ class AmazonBot:
             'a').get_attribute('href') for elem in giveaways]
         for link in links:
             print('-----Start of Entry------')
+            logger.info('Start of Entry: %s', link)
             count += 1
             bot.get(link)
             time.sleep(5)
@@ -52,18 +53,21 @@ class AmazonBot:
                     '//*[@id="reactApp"]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/span')
             except:
                 print("Error on alreadyEntered.")
+                logger.info("Error on alreadyEntered")
                 pass
             try:
                 box = bot.find_element_by_link_text(
                     'Tap the box to see if you win')
             except:
                 print('No box to click')
+                logger.info("No box to click")
                 box = None
                 pass
             try:
                 video = bot.find_element_by_class_name('youtube-video')
             except:
                 print('No YouTube video to watch')
+                logger.info("No youtube video to watch")
                 video = None
                 pass
             if video is None:
@@ -71,6 +75,7 @@ class AmazonBot:
                     video = bot.find_element_by_class_name('amazon-video')
                 except:
                     print('No Amazon video to watch.')
+                    logger.info('No Amazon video to watch.')
                     pass
             # start of main if
 
@@ -78,8 +83,10 @@ class AmazonBot:
                 try:
                     box.click()
                     print('Entered Giveaway')
+                    logger.info('Entered Giveaway')
                 except:
                     print('Error clicking the box')
+                    logger.info("Error clicking the box")
                     pass
                 time.sleep(5)
                 self.result(link)
@@ -87,40 +94,50 @@ class AmazonBot:
                 try:
                     video.click()
                     print('Watching video.')
+                    logger.info('Watching video.')
                     time.sleep(20)
                 except:
                     print('Could not click video box')
+                    logger.info('Could not click video box')
                     pass
                 try:
                     continueButton = bot.find_element_by_xpath(
                         '//*[@id="reactApp"]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[6]/div/div/div/button')
                     continueButton.click()
                     print('Entered giveaway')
+                    logger.info('Entered giveaway')
                 except:
-                    print('Unable to locate continueButton')
-                    print('Giveaway page: ' + str(urlIndex))
-                    print(link)
+                    print("Unable to locate continueButton.  URL: %s", link)
+                    #print('Giveaway page: ' + str(urlIndex))
+                    # print(link)
+                    logger.info(
+                        "Unable to locate continueButton.  URL: %s", link)
                     pass
                 time.sleep(5)
                 self.result(link)
             elif not "Enter for a chance" in alreadyEntered.text:
-                print("Aleady entered.")
+                print("Already entered.")
+                logger.info("Already entered.")
                 time.sleep(5)
             else:
-                print('Error entering giveaway')
-                print(link)
+                print('Error entering giveaway: %s', link)
+                # print(link)
+                logger.info('Error entering giveaway: %s', link)
                 time.sleep(5)
             # end of main if chain
             print('-----End of entry-----')
+            logger.info("---End of entry---")
             print(count)
+            logger.info("Entry count: %s", str(count))
         return count
 
 
 logFormat = "%(levelname)s %(asctime)s - %(message)s"  # adds date and time
 logging.basicConfig(filename=".\\daemonzon.log",
-                    level=logging.DEBUG,
+                    level=logging.INFO,
                     format=logFormat,
                     filemode='w')  # rewrite the file so it doesn't get to big.
+logger = logging.getLogger()
 entryCount = 0
 print('Welcome Daemonzon will enter giveaways on your behalf')
 daemon = AmazonBot()
