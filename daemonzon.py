@@ -106,12 +106,10 @@ class AmazonBot:
                     continueButton = bot.find_element_by_xpath(
                         '//*[@id="reactApp"]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[6]/div/div/div/button')
                     continueButton.click()
-                    print('Clicked entry box')
-                    logger.info('Clicked entry box')
+                    print('Clicked continue to entry')
+                    logger.info('Clicked continue to entry')
                 except:
                     print(f"Unable to locate continueButton.  URL: {link}")
-                    #print('Giveaway page: ' + str(urlIndex))
-                    # print(link)
                     logger.info(
                         "Unable to locate continueButton.  URL: %s", link)
                     pass
