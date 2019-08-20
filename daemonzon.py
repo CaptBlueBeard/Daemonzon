@@ -1,15 +1,17 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
+import logging
 
 
 class AmazonBot:
-    def __init__(self):
+    def __init__(self, logger=None):
         self.bot = webdriver.Firefox()
+        self.logger = logging.getLogger(__name__)
 
     def login(self):
         # ----------------User Logs In -------------------
-        # make sure cookies are allowed for amazon in the remote controled Firefox
+        self.logger.info("User logs in.")
         bot = self.bot
         bot.get('https://www.amazon.com/ga/giveaways')
         input('Log in on the Firefox browser. Once complete, press Enter here ')
@@ -24,11 +26,14 @@ class AmazonBot:
             return
         if "you didn't win" in r.text:
             print("You didn't win")
+            self.logger.info("You didn't win")
         elif "You're a Winner" in r.text:
-            print("You won!")
+            print("!!!!!!!You won!!!!!!!!!")
             print(link)
+            self.logger.info("!!!!!!!You won!!!!!!!!!:  %s", link)
         else:
             print("Could not find result")
+            self.logger.info("Could not find result")
 
     def enterGiveaway(self, urlIndex, count):
         bot = self.bot
@@ -111,6 +116,11 @@ class AmazonBot:
         return count
 
 
+logFormat = "%(levelname)s %(asctime)s - %(message)s"  # adds date and time
+logging.basicConfig(filename=".\\daemonzon.log",
+                    level=logging.DEBUG,
+                    format=logFormat,
+                    filemode='w')  # rewrite the file so it doesn't get to big.
 entryCount = 0
 print('Welcome Daemonzon will enter giveaways on your behalf')
 daemon = AmazonBot()
