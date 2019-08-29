@@ -18,6 +18,7 @@ class AmazonBot:
 
     def result(self, link):
         bot = self.bot
+        r = None
         try:
             r = bot.find_element_by_xpath(
                 '//*[@id="reactApp"]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/span')
@@ -32,8 +33,8 @@ class AmazonBot:
             print(link)
             logger.info("!!!!!!!You won!!!!!!!!!:  %s", link)
         else:
-            print("Could not find result")
-            logger.info("Could not find result")
+            print("Could not determine result")
+            logger.info("Could not determine result")
 
     def enterGiveaway(self, urlIndex, count):
         bot = self.bot
@@ -54,6 +55,7 @@ class AmazonBot:
             except:
                 print("Error on alreadyEntered.")
                 logger.info("Error on alreadyEntered")
+                alreadyEntered = None
                 pass
             try:
                 box = bot.find_element_by_link_text(
@@ -121,7 +123,6 @@ class AmazonBot:
                 time.sleep(5)
             else:
                 print(f"Error entering giveaway: {link}")
-                # print(link)
                 logger.info('Error entering giveaway: %s', link)
                 time.sleep(5)
             # end of main if chain
