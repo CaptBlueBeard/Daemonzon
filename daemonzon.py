@@ -7,7 +7,7 @@ import logging
 class AmazonBot:
     def __init__(self, logger=None):
         self.bot = webdriver.Firefox()
-        #self.logger = logging.getLogger(__name__)
+        # self.logger = logging.getLogger(__name__)
 
     def login(self):
         # ----------------User Logs In -------------------
@@ -117,10 +117,11 @@ class AmazonBot:
                     pass
                 time.sleep(5)
                 self.result(link)
-            elif not "Enter for a chance" in alreadyEntered.text:
-                print("Already entered.")
-                logger.info("Already entered.")
-                time.sleep(5)
+            elif not alreadyEntered is None:
+                if not "Enter for a chance" in alreadyEntered.text:
+                    print("Already entered.")
+                    logger.info("Already entered.")
+                    time.sleep(5)
             else:
                 print(f"Error entering giveaway: {link}")
                 logger.info('Error entering giveaway: %s', link)
