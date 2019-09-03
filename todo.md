@@ -2,6 +2,6 @@
 
 - [x]  track wins and loses
 - [ ]  test win notification.  Should work but I haven't won yet!
-- [ ]  output messages to a file
+- [x]  output messages to a file
 - [ ]  add the ability to follow someone to enter contest that require that.  But do I want to follow people?  Can I script unfollowing people?
-- [ ]  incorporate logging to help debug.
+- [x]  incorporate logging to help debug.
