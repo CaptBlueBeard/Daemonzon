@@ -25,7 +25,7 @@ class AmazonBot:
         except:
             print('Could not get result.')
             return
-        if "you didn't win" in r.text or "You didn't win":
+        if "you didn't win" in r.text or "You didn't win" in r.text:
             print("You didn't win")
             # print(r.text)
             logger.info("You didn't win")
