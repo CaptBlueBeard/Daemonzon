@@ -25,15 +25,16 @@ class AmazonBot:
         except:
             print('Could not get result.')
             return
-        if "you didn't win" in r.text:
+        if "you didn't win" in r.text or "You didn't win":
             print("You didn't win")
+            # print(r.text)
             logger.info("You didn't win")
         elif "You're a Winner" in r.text:
             print("!!!!!!!You won!!!!!!!!!")
-            print(link)
             logger.info("!!!!!!!You won!!!!!!!!!:  %s", link)
         else:
             print("Could not determine result")
+            print(r.text)
             logger.info("Could not determine result")
 
     def enterGiveaway(self, urlIndex, count):
