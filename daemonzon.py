@@ -19,23 +19,23 @@ class AmazonBot:
     def result(self, link):
         bot = self.bot
         r = None
+
         try:
             r = bot.find_element_by_xpath(
                 '//*[@id="reactApp"]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[1]/span')
         except:
             print('Could not get result.')
             return
-        if "you didn't win" in r.text or "You didn't win" in r.text:
-            print("You didn't win")
-            # print(r.text)
-            logger.info("You didn't win")
-        elif "You're a Winner" in r.text:
-            print("!!!!!!!You won!!!!!!!!!")
-            logger.info("!!!!!!!You won!!!!!!!!!:  %s", link)
-        else:
-            print("Could not determine result")
+
+        if not r is None:
             print(r.text)
-            logger.info("Could not determine result")
+            print(link)
+            logger.info(r.text)
+            logger.info(link)
+        else:
+            print("Result was none")
+            print(r.text)
+            logger.info("Result was none")
 
     def enterGiveaway(self, urlIndex, count):
         bot = self.bot
